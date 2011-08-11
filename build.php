@@ -7,7 +7,7 @@
  * file for more information.
  * 
  * License: Copyright 2008-2011 UC Regents. Open source BSD license.
- * Author: Kevin S. Clarke <a href="mailto:ksclarke@gmail.com">
+ * Author: Kevin S. Clarke <ksclarke@gmail.com>
  */
 
 // Show me the errors!!
