@@ -1,0 +1,7 @@
+php_value max_execution_time 2000
+
+<FilesMatch "^(config\.xml|sitemap\.log)$">
+ Order Allow,Deny
+ Deny from all
+</FilesMatch>
+

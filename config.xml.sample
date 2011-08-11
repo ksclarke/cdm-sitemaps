@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdmsitemaps>
+    <production>
+
+		<!-- web address of your contentdm instance (w/o http://) -->
+        <webhost>servernumber.contentdm.oclc.org</webhost>
+        
+        <!-- user configured in worldcat.org and contentdm web admin -->
+        <user>username_here</user>
+        <password>password_here</password>
+
+        <!-- whether to create sitemaps for unpublished collections -->
+        <!-- if created, they still aren't referenced in the sitemap index -->
+        <unpublished>false</unpublished>
+
+        <!-- log is in the default directory unless placed elsewhere -->
+        <!-- if placed elsewhere, you may need to update .htaccess file -->
+        <logfile>sitemap.log</logfile>
+
+    </production>
+</cdmsitemaps>
