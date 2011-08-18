@@ -41,16 +41,14 @@ function createSitemapIndex($publicxml, $cdmxml, $http, $service) {
 	foreach ($collections as $collection) {
 		$alias = $collection->getElementsByTagName('alias')->item(0)->nodeValue;
 		$name = $collection->getElementsByTagName('name')->item(0)->nodeValue;
-		$dir = dirname( __FILE__ ) . '/collections' . $alias;
-			
-		if (!file_exists($dir)) {
-			mkdir($dir, 0775, true);
-		}
-		 
+
+		// Turn the collection alias into a file name
+		$fileName = '/sitemap-' . substr($alias, 1) . '.xml';
+
 		if ($published || contains($publicXPath, $name)) {
 			$sitemap = $doc->createElementNS($ns, 'sitemap');
 			$index->appendChild($sitemap);
-			$loc = $doc->createElementNS($ns, 'loc', '/sitemaps' . $alias);
+			$loc = $doc->createElementNS($ns, 'loc', $fileName);
 			$sitemap->appendChild($loc);
 
 			$lastModDate = createSitemap($alias, $name, $http, $service);
@@ -64,7 +62,7 @@ function createSitemapIndex($publicxml, $cdmxml, $http, $service) {
 
 	$doc->formatOutput = true;
 	echo $doc->saveXML();
-	$doc->save(dirname( __FILE__ ) . '/index.xml');
+	$doc->save(dirname( __FILE__ ) . '/sitemap.xml');
 }
 
 function createSitemap($alias, $name, $http, $service) {
@@ -126,7 +124,7 @@ function createSitemap($alias, $name, $http, $service) {
 	}
 	
 	// write our sitemap in its own subdirectory
-	$fileName = dirname( __FILE__ ) . '/collections' . $alias . '/index.xml';
+	$fileName = dirname( __FILE__ ) . '/sitemap-' . substr($alias, 1) . '.xml';
 	$sitemap->formatOutput = true;
 	$sitemap->save($fileName);
 	
