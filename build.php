@@ -6,7 +6,7 @@
  * of the individual publicly available collections.  See the project's README
  * file for more information.
  * 
- * License: Copyright 2008-2011 UC Regents. Open source BSD license.
+ * License: Copyright 2011 UC Regents. Open source BSD license.
  * Author: Kevin S. Clarke <ksclarke@gmail.com>
  */
 
