@@ -43,7 +43,7 @@ function createSitemapIndex($publicxml, $cdmxml, $http, $service) {
 		$name = $collection->getElementsByTagName('name')->item(0)->nodeValue;
 
 		// Turn the collection alias into a file name
-		$fileName = '/sitemap-' . substr($alias, 1) . '.xml';
+		$fileName = 'sitemap-' . substr($alias, 1) . '.xml';
 
 		if ($published || contains($publicXPath, $name)) {
 			$sitemap = $doc->createElementNS($ns, 'sitemap');
@@ -121,7 +121,7 @@ function createSitemap($alias, $name, $http, $service) {
 			}
 		}
 		
-			// tweak our loop parameters
+		// tweak our loop parameters
 		if ($total > 500 || $total == -1) {
 			Zend_Registry::get('logger')->log($total . ' ' . $start, Zend_Log::DEBUG);
 
@@ -129,8 +129,7 @@ function createSitemap($alias, $name, $http, $service) {
 			$total = $total - 500;
 		}
 	}
-	
-	// write our sitemap in its own subdirectory
+
 	$fileName = dirname( __FILE__ ) . '/sitemap-' . substr($alias, 1) . '.xml';
 	$sitemap->formatOutput = true;
 	$sitemap->save($fileName);
