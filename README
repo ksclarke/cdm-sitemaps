@@ -53,6 +53,8 @@ of your ContentDM installation.  You will want to create a cron job that hits
 the build.php file periodically (and you might want to block general access to
 that too).
 
+You probably will want to change the timezone setting in the .htaccess file.
+
 
 ================================================================================
 COPYRIGHT AND LICENSE
