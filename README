@@ -31,6 +31,11 @@ Seems we're okay with execution time and RAM usage... now we just need to know
 where we'll put this file once they release 6.1.  Update this section once the
 new CDM version is released.
 
+UPDATE: This script won't work with hosted ContentDM instances.  Recent updates
+now prevent users from uploading files to the file system (needed for placement
+of the sitemap files) and also prevent authenticated access to the API (even if
+you are authenticated, it won't show you private collections).
+
 
 ================================================================================
 INSTALLATION

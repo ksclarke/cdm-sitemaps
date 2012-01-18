@@ -2,7 +2,7 @@
 <cdmsitemaps>
     <production>
 
-		<!-- web address of your contentdm instance (w/o http://) -->
+        <!-- web address of your contentdm instance (w/o http://) -->
         <webhost>servernumber.contentdm.oclc.org</webhost>
         
         <!-- user configured in worldcat.org and contentdm web admin -->
