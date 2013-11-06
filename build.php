@@ -8,11 +8,17 @@
  * 
  * License: Copyright 2011 UC Regents. Open source BSD license.
  * Author: Kevin S. Clarke <ksclarke@gmail.com>
+ * 
  */
 
 // Show me the errors!!
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
+
+
+//YOU NEED TO SET THIS TO YOUR LOCAL PATH TO ZEND
+$zendpath = '/usr/local/contentdm6/Website/cdm_common/library';
+set_include_path(get_include_path() . PATH_SEPARATOR . $zendpath);
 
 require_once 'Zend/Http/Client.php';
 require_once 'Zend/Config/Xml.php';
@@ -20,7 +26,7 @@ require_once 'Zend/Log/Writer/Stream.php';
 require_once 'Zend/Log.php';
 require_once 'Zend/Registry.php';
 
-function createSitemapIndex($publicxml, $cdmxml, $http, $service) {
+function createSitemapIndex($publicxml, $cdmxml, $http, $service, $website, $path) {
 	$xml = new DOMDocument('1.0');
 	$doc = new DOMDocument('1.0');
 	$public = new DOMDocument('1.0');
@@ -48,7 +54,7 @@ function createSitemapIndex($publicxml, $cdmxml, $http, $service) {
 		if ($published || contains($publicXPath, $name)) {
 			$sitemap = $doc->createElementNS($ns, 'sitemap');
 			$index->appendChild($sitemap);
-			$loc = $doc->createElementNS($ns, 'loc', $fileName);
+			$loc = $doc->createElementNS($ns, 'loc', $website . '/' . $path . '/' . $fileName);
 			$sitemap->appendChild($loc);
 
 			$lastModDate = createSitemap($alias, $name, $http, $service);
@@ -168,7 +174,8 @@ function processRequest($http, $url) {
 }
 
 $config = new Zend_Config_Xml('config.xml', 'production');
-$host = 'https://' . $config->webhost;
+$website = 'http://' . $config->website;
+$host = 'http://' . $config->server;
 $service = $host . '/dmwebservices/index.php?';
 $query = 'q=dmGetCollectionList/xml';
 
@@ -188,7 +195,7 @@ try {
 
 		if ($response->isSuccessful()) {
 			$body = processRequest($http, $service . $query);
-			createSitemapIndex($public, $body, $http, $service);
+			createSitemapIndex($public, $body, $http, $service, $website, $config->path);
 		}
 		else {
 			throw new Zend_Http_Client_Exception('Unable to read response');
@@ -196,7 +203,7 @@ try {
 	}
 	else {
 		$body = processRequest($http, $service . $query);
-		createSitemapIndex($public, $body, $http, $service);
+		createSitemapIndex($public, $body, $http, $service, $website, $config->path);
 	}
 }
 catch (Zend_Http_Client_Exception $details) {
